@@ -1,17 +1,19 @@
 package assets.Heroes;
 
 import assets.BattleTypes.BattleType;
+import assets.BattleTypes.Bearer;
 import assets.BattleTypes.Distant;
 import assets.Hero;
 import assets.HeroType;
 
 import java.util.List;
 
-public class Villager  extends Hero {
+public class Villager extends Bearer {
     public Villager(String name, int[] position) {
         super(name, position);
         HeroType = assets.HeroType.Villager;
         Range = 1;
+        IsReady = true;
     }
 
     @Override
@@ -28,8 +30,10 @@ public class Villager  extends Hero {
 //
 //        ((Distant)nearestMate).Ammo += 1;
 
-        for (var mate : mates.stream().filter(mate -> mate.Health > 0 && mate.BattleType == assets.BattleTypes.BattleType.Distant && ((Distant)mate).Ammo < ((Distant)mate).MaxAmmo).toList()) {
-            ((Distant)mate).Ammo += 1;
-        }
+//        for (var mate : mates.stream().filter(mate -> mate.Health > 0 && mate.BattleType == assets.BattleTypes.BattleType.Distant && ((Distant)mate).Ammo < ((Distant)mate).MaxAmmo).toList()) {
+//            ((Distant)mate).Ammo += 1;
+//        }
+
+        IsReady = true;
     }
 }

@@ -18,8 +18,19 @@ public class Distant extends Hero {
     @Override
     public void Step(List<Hero> mates, List<Hero> enemies)
     {
-        if (Health <= 0 || Ammo <= 0)
+        if (Health <= 0)
             return;
+
+        if(Ammo < MaxAmmo) {
+            var bearers = mates.stream().filter(hero -> hero.BattleType == assets.BattleTypes.BattleType.Bearer
+                    && hero.Health > 0 && ((Bearer) hero).IsReady).toList();
+
+            if(bearers.isEmpty())
+                return;
+
+            ((Bearer)bearers.get(0)).IsReady = false;
+            Ammo += 1;
+        }
 
         var enemy = GetNearestEnemy(Position, enemies);
 
@@ -29,6 +40,8 @@ public class Distant extends Hero {
             return;
         }
 
+        if(Ammo <= 0)
+            return;
 
         Attack(enemy);
     }
